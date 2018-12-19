@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Welcome to HyperDev!</title>
-    <meta name="description" content="A cool thing made with HyperDev">
-    <link id="favicon" rel="icon" href="https://hyperdev.com/favicon-app.ico" type="image/x-icon">
+    <title>Welcome to Glitch!</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/favicon-app.ico" type="image/x-icon">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,26 +11,26 @@
   </head>
   <body>
     <header>
-      <h1 id='threadTitle'></h1>
+      <h1 id="threadTitle"></h1>
     </header>
     <br>
     
-    <div id='boardDisplay'></div>
+    <div id="boardDisplay"></div>
     
-    <hr style='margin: 50px; margin-top: 200px'>
+    <hr style="margin: 50px 2%;">
     <!-- Your web-app is https, so your scripts need to be too -->
-    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
-            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"
             crossorigin="anonymous"></script>
     <script>
       $(function() {
         var currentURL = window.location.pathname.slice(3);
         currentURL = currentURL.split('/');
         
-        var url = "/api/replies/"+currentURL[0];
-        $('#threadTitle').text(window.location.pathname);
+        var url = '/api/replies/'+currentURL[0];
+        $('#threadTitle').html('<a href="/b/'+currentURL[0]+'">/b/'+currentURL[0]+'</a>/<a href="/b/'+currentURL[0]+'/'+currentURL[1]+'">'+currentURL[1]+'</a>');
         $.ajax({
-          type: "GET",
+          type: 'GET',
           url: url,
           data:{thread_id: currentURL[1]},
           success: function(ele)
@@ -44,7 +44,7 @@
               var thread = ['<div class="thread">'];
               thread.push('<div class="main">')
               thread.push('<p class="id">id: '+ele._id+' ('+ele.created_on+')</p>');
-              thread.push('<form id="reportThread"><input type="hidden" name="report_id" value="'+ele._id+'"><input type="submit" value="Report"></form>');
+              thread.push('<form id="reportThread"><input type="hidden" name="thread_id" value="'+ele._id+'"><input type="submit" value="Report"></form>');
               thread.push('<form id="deleteThread"><input type="hidden" value="'+ele._id+'" name="thread_id" required=""><input type="text" placeholder="password" name="delete_password" required=""><input type="submit" value="Delete"></form>');
               thread.push('<h3>'+ele.text+'</h3>');
               thread.push('</div><div class="replies">');
@@ -68,14 +68,13 @@
         });
         
         $('#newThread').submit(function(){
-          $(this).attr('action', "/api/threads/" + currentBoard);
+          $(this).attr('action', '/api/threads/' + currentBoard);
         });
         
-        
         $('#boardDisplay').on('submit','#reportThread', function(e) {
-          var url = "/api/threads/"+currentURL[0];
+          var url = '/api/threads/'+currentURL[0];
           $.ajax({
-            type: "PUT",
+            type: 'PUT',
             url: url,
             data: $(this).serialize(),
             success: function(data) { alert(data) }
@@ -83,9 +82,9 @@
           e.preventDefault();
         });
         $('#boardDisplay').on('submit','#reportReply', function(e) {
-          var url = "/api/replies/"+currentURL[0];
+          var url = '/api/replies/'+currentURL[0];
           $.ajax({
-            type: "PUT",
+            type: 'PUT',
             url: url,
             data: $(this).serialize(),
             success: function(data) { alert(data) }
@@ -93,9 +92,9 @@
           e.preventDefault();
         });
         $('#boardDisplay').on('submit','#deleteThread', function(e) {
-          var url = "/api/threads/"+currentURL[0];
+          var url = '/api/threads/'+currentURL[0];
           $.ajax({
-            type: "DELETE",
+            type: 'DELETE',
             url: url,
             data: $(this).serialize(),
             success: function(data) { alert(data) }
@@ -103,9 +102,9 @@
           e.preventDefault();
         });        
         $('#boardDisplay').on('submit','#deleteReply', function(e) {
-          var url = "/api/replies/"+currentURL[0];
+          var url = '/api/replies/'+currentURL[0];
           $.ajax({
-            type: "DELETE",
+            type: 'DELETE',
             url: url,
             data: $(this).serialize(),
             success: function(data) { alert(data) }
