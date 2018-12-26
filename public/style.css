@@ -1,4 +1,4 @@
-* {
+/* * {
   margin: 0px;
   padding: 0px;
 }
@@ -33,4 +33,17 @@ body {
 
 #submitNewThread {
   margin: 50px;
+} */
+
+.jumbotron {
+	margin-top: 2rem;
+}
+
+.font-weight-semibold {
+	font-weight: 600 !important;
+}
+
+#deleteThread input[name="delete_password"],
+#deleteReply input[name="delete_password"] {
+	width: 200px !important;
 }
