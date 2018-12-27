@@ -56,7 +56,7 @@
 				// THIS ARRAY SET UP IS FOR CODE READABILITIES AND TESTING!
 				// THIS IS NOT WHAT IT WOULD LOOK LIKE TO GO LIVE
 				//
-				// console.log(ele); // Can I use typeScript please?!
+				// console.log(ele); // Can I use TypeScript please?!
 				var thread = [];
 
 				thread.push(
@@ -68,32 +68,32 @@
 
 				ele.replies.forEach(function(rep) {
 					thread.push(
-					'<div class="card reply mb-2">',
-						'<div class="card-body">',
-							'<p class="card-text">' + rep.text + '</p>',
-						'</div>',
-						'<div class="card-footer text-muted">',
-							'<div class="row align-items-center">',
-								'<div class="col">',
-									'<p class="mb-2"><span class="font-weight-semibold">Created on:</span> <span>' + rep.created_on + '</span></p>',
-									'<p class="id m-0"><span class="font-weight-semibold">Reply ID:</span> <span>' + rep._id + '</span></p>',
-								'</div>',
-								'<div class="col text-right">',
-									'<form id="reportReply" class="form-inline d-inline-block mr-4">',
-										'<input type="hidden" name="thread_id" value="' + ele._id + '">',
-										'<input type="hidden" name="reply_id" value="' + rep._id + '">',
-										'<input class="btn btn-warning" type="submit" value="Report reply">',
-									'</form>',
-									'<form id="deleteReply" class="form-inline d-inline-block">',
-										'<input type="hidden" name="thread_id" value="' + ele._id + '" required>',
-										'<input type="hidden" name="reply_id" value="' + rep._id + '" required>',
-										'<input class="form-control mr-2" type="text" name="delete_password" placeholder="Password" required>',
-										'<input class="btn btn-danger" type="submit" value="Delete reply">',
-									'</form>',
-								'</div>',
-							'</div>',
-						'</div>',
-					'</div>'
+								'<div class="card reply mb-2">',
+									'<div class="card-body">',
+										'<p class="card-text">' + rep.text + '</p>',
+									'</div>',
+									'<div class="card-footer text-muted">',
+										'<div class="row align-items-center">',
+											'<div class="col">',
+												'<p class="mb-2"><span class="font-weight-semibold">Created on:</span> <span>' + rep.created_on + '</span></p>',
+												'<p class="id m-0"><span class="font-weight-semibold">Reply ID:</span> <span>' + rep._id + '</span></p>',
+											'</div>',
+											'<div class="col text-right">',
+												'<form id="reportReply" class="form-inline d-inline-block mr-4">',
+													'<input type="hidden" name="thread_id" value="' + ele._id + '">',
+													'<input type="hidden" name="reply_id" value="' + rep._id + '">',
+													'<input class="btn btn-warning" type="submit" value="Report reply">',
+												'</form>',
+												'<form id="deleteReply" class="form-inline d-inline-block">',
+													'<input type="hidden" name="thread_id" value="' + ele._id + '" required>',
+													'<input type="hidden" name="reply_id" value="' + rep._id + '" required>',
+													'<input class="form-control mr-2" type="text" name="delete_password" placeholder="Password" required>',
+													'<input class="btn btn-danger" type="submit" value="Delete reply">',
+												'</form>',
+											'</div>',
+										'</div>',
+									'</div>',
+								'</div>'
 					);
 				});
 
