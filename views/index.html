@@ -63,9 +63,9 @@
 									<h5>(POST /api/threads/:board)</h5>
 									<form id="newThread" class="text-center" action="/api/threads/test" method="post">
 										<div class="form-group mb-0">
-											<input id="board1" class="form-control mb-2" type="text" name="board" placeholder="board" required>
+											<input id="board1" class="form-control mb-2" type="text" name="board" placeholder="Board" required>
 											<textarea class="form-control mb-2" name="text" placeholder="Thread text..." required></textarea>
-											<input class="form-control mb-2" type="text" name="delete_password" placeholder="password to delete" required>
+											<input class="form-control mb-2" type="text" name="delete_password" placeholder="Password to delete" required>
 										</div>
 										<input class="btn btn-primary" type="submit" value="Submit">
 									</form>
@@ -75,10 +75,10 @@
 									<h5>(PUT /api/threads/:board)</h5>
 									<form id="reportThread" class="text-center">
 										<div class="form-group mb-0">
-											<input id="board2" class="form-control mb-2" type="text" name="board" placeholder="board" required>
-											<input class="form-control mb-2" type="text" name="thread_id" placeholder="id to report" required>
+											<input id="board2" class="form-control mb-2" type="text" name="board" placeholder="Board" required>
+											<input class="form-control mb-2" type="text" name="thread_id" placeholder="ID of thread to report" required>
 										</div>
-										<input class="btn btn-primary" type="submit" value="Submit">
+										<input class="btn btn-warning" type="submit" value="Submit">
 									</form>
 								</div>
 								<div class="col">
@@ -86,11 +86,11 @@
 									<h5>(DELETE /api/threads/:board)</h5>
 									<form id="deleteThread" class="text-center">
 										<div class="form-group mb-0">
-											<input id="board3" class="form-control mb-2" type="text" name="board" placeholder="board" required>
-											<input class="form-control mb-2" type="text" name="thread_id" placeholder="id to delete" required>
-											<input class="form-control mb-2" type="text" name="delete_password" placeholder="password" required>
+											<input id="board3" class="form-control mb-2" type="text" name="board" placeholder="Board" required>
+											<input class="form-control mb-2" type="text" name="thread_id" placeholder="ID of thread to delete" required>
+											<input class="form-control mb-2" type="text" name="delete_password" placeholder="Password" required>
 										</div>
-										<input class="btn btn-primary" type="submit" value="Submit">
+										<input class="btn btn-danger" type="submit" value="Submit">
 									</form>
 								</div>
 							</div>
@@ -103,10 +103,10 @@
 									<h5>(POST /api/replies/:board)</h5>
 									<form id="newReply" class="text-center" action="/api/threads/test" method="post">
 										<div class="form-group mb-0">
-											<input id="board4" class="form-control mb-2" type="text" name="board" placeholder="board" required>
-											<input class="form-control mb-2" type="text" name="thread_id" placeholder="thread id" required>
+											<input id="board4" class="form-control mb-2" type="text" name="board" placeholder="Board" required>
+											<input class="form-control mb-2" type="text" name="thread_id" placeholder="Thread ID" required>
 											<textarea class="form-control mb-2" name="text" placeholder="Reply text..." required></textarea>
-											<input class="form-control mb-2" type="text" name="delete_password" placeholder="password to delete" required>
+											<input class="form-control mb-2" type="text" name="delete_password" placeholder="Password to delete" required>
 										</div>
 										<input class="btn btn-primary" type="submit" value="Submit">
 									</form>
@@ -116,11 +116,11 @@
 									<h5>(PUT /api/replies/:board)</h5>
 									<form id="reportReply" class="text-center">
 										<div class="form-group mb-0">
-											<input id="board5" class="form-control mb-2" type="text" name="board" placeholder="board" required>
-											<input class="form-control mb-2" type="text" name="thread_id" placeholder="thread id" required>
-											<input class="form-control mb-2" type="text" name="reply_id" placeholder="id to report" required>
+											<input id="board5" class="form-control mb-2" type="text" name="board" placeholder="Board" required>
+											<input class="form-control mb-2" type="text" name="thread_id" placeholder="Thread ID" required>
+											<input class="form-control mb-2" type="text" name="reply_id" placeholder="ID of reply to report" required>
 										</div>
-										<input class="btn btn-primary" type="submit" value="Submit">
+										<input class="btn btn-warning" type="submit" value="Submit">
 									</form>
 								</div>
 								<div class="col">
@@ -128,12 +128,12 @@
 									<h5>(DELETE /api/replies/:board)</h5>
 									<form id="deleteReply" class="text-center">
 										<div class="form-group mb-0">
-											<input id="board6" class="form-control mb-2" type="text" name="board" placeholder="board" required>
-											<input class="form-control mb-2" type="text" name="thread_id" placeholder="thread id" required>
-											<input class="form-control mb-2" type="text" name="reply_id" placeholder="id to delete" required>
-											<input class="form-control mb-2" type="text" name="delete_password" placeholder="password" required>
+											<input id="board6" class="form-control mb-2" type="text" name="board" placeholder="Board" required>
+											<input class="form-control mb-2" type="text" name="thread_id" placeholder="Thread ID" required>
+											<input class="form-control mb-2" type="text" name="reply_id" placeholder="ID of reply to delete" required>
+											<input class="form-control mb-2" type="text" name="delete_password" placeholder="Password" required>
 										</div>
-										<input class="btn btn-primary" type="submit" value="Submit">
+										<input class="btn btn-danger" type="submit" value="Submit">
 									</form>
 								</div>
 							</div>
