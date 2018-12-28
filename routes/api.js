@@ -56,13 +56,13 @@ module.exports = function (app) {
   .post(function(req, res) {
     var board = req.params.board;
     
-    if (req.body.text === undefined) {
+    if (req.body.text === undefined || req.body.text === '') {
       return res.json({ error: 'Text is required' });
     }
     
     let text = req.body.text;
     
-    if (req.body.delete_password === undefined) {
+    if (req.body.delete_password === undefined || req.body.delete_password === '') {
       return res.json({ error: 'Delete password is required' });
     }
     
@@ -94,7 +94,7 @@ module.exports = function (app) {
   .put(function(req, res) {
     var board = req.params.board;
     
-    if (req.body.thread_id === undefined) {
+    if (req.body.thread_id === undefined || req.body.thread_id === '') {
       return res.json('Thread ID is required');
     }
     
@@ -129,13 +129,13 @@ module.exports = function (app) {
   .delete(function(req, res) {
     var board = req.params.board;
     
-    if (req.body.thread_id === undefined) {
+    if (req.body.thread_id === undefined || req.body.thread_id === '') {
       return res.json({ error: 'Thread ID is required' });
     }
     
     let thread_id = req.body.thread_id;
     
-    if (req.body.delete_password === undefined) {
+    if (req.body.delete_password === undefined || req.body.delete_password === '') {
       return res.json({ error: 'Delete password is required' });
     }
     
@@ -168,7 +168,7 @@ module.exports = function (app) {
   .get(function(req, res) {
     var board = req.params.board;
     
-    if (req.query.thread_id === undefined) {
+    if (req.query.thread_id === undefined || req.query.thread_id === '') {
       return res.json({ error: 'Thread ID is required' });
     }
     
@@ -204,19 +204,19 @@ module.exports = function (app) {
   .post(function(req, res) {
     var board = req.params.board;
     
-    if (req.body.thread_id === undefined) {
+    if (req.body.thread_id === undefined || req.body.thread_id === '') {
       return res.json({ error: 'Thread ID is required' });
     }
     
     let thread_id = req.body.thread_id;
     
-    if (req.body.text === undefined) {
+    if (req.body.text === undefined || req.body.text === '') {
       return res.json({ error: 'Text is required' });
     }
     
     let text = req.body.text;
     
-    if (req.body.delete_password === undefined) {
+    if (req.body.delete_password === undefined || req.body.delete_password === '') {
       return res.json({ error: 'Delete password is required' });
     }
     
@@ -259,13 +259,13 @@ module.exports = function (app) {
   .put(function(req, res) {
     var board = req.params.board;
     
-    if (req.body.thread_id === undefined) {
+    if (req.body.thread_id === undefined || req.body.thread_id === '') {
       return res.json('Thread ID is required');
     }
     
     let thread_id = req.body.thread_id;
     
-    if (req.body.reply_id === undefined) {
+    if (req.body.reply_id === undefined || req.body.reply_id === '') {
       return res.json('Reply ID is required');
     }
     
@@ -305,19 +305,19 @@ module.exports = function (app) {
   .delete(function(req, res) {
     var board = req.params.board;
     
-    if (req.body.thread_id === undefined) {
+    if (req.body.thread_id === undefined || req.body.thread_id === '') {
       return res.json({ error: 'Thread ID is required' });
     }
     
     let thread_id = req.body.thread_id;
     
-    if (req.body.reply_id === undefined) {
+    if (req.body.reply_id === undefined || req.body.reply_id === '') {
       return res.json({ error: 'Reply ID is required' });
     }
     
     let reply_id = req.body.reply_id;
     
-    if (req.body.delete_password === undefined) {
+    if (req.body.delete_password === undefined || req.body.delete_password === '') {
       return res.json({ error: 'Delete password is required' });
     }
     
