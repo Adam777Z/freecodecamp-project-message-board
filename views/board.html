@@ -49,7 +49,7 @@
 	<script>
 	$(function() {
 		var currentBoard = window.location.pathname.slice(3).replace(/\/$/, '');
-		var url = '/api/threads/' + currentBoard;
+		var url = '/api/threads/' + currentBoard + '?limit=0';
 		$('#boardTitle').text('Welcome to /b/' + currentBoard);
 		$.ajax({
 			type: 'GET',
