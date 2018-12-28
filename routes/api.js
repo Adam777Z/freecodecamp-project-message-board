@@ -18,6 +18,8 @@ module.exports = function (app) {
   .get(function(req, res) {
     var board = req.params.board;
     
+    let limit = (req.query.limit !== undefined && req.query.limit !== '' ? parseInt(req.query.limit) : 10);
+    
     MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true }, function(err, db) {
       if (err) {
         // console.log('Database error: ' + err);
@@ -31,7 +33,7 @@ module.exports = function (app) {
             sort: {
               bumped_on: -1
             },
-            limit: 10,
+            limit: limit,
             projection: {
               delete_password: 0,
               reported: 0,
