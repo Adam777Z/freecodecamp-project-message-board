@@ -20,7 +20,7 @@ module.exports = function (app) {
     
     let limit = (req.query.limit !== undefined && req.query.limit !== '' ? parseInt(req.query.limit) : 10);
     
-    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true }, function(err, db) {
+    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
       if (err) {
         // console.log('Database error: ' + err);
         return res.json({ error: 'error' });
@@ -72,7 +72,7 @@ module.exports = function (app) {
     
     let date = new Date();
     
-    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true }, function(err, db) {
+    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
       if (err) {
         // console.log('Database error: ' + err);
         return res.json({ error: 'error' });
@@ -102,7 +102,7 @@ module.exports = function (app) {
     
     let thread_id = req.body.thread_id;
     
-    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true }, function(err, db) {
+    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
       if (err) {
         // console.log('Database error: ' + err);
         return res.json({ error: 'error' });
@@ -143,7 +143,7 @@ module.exports = function (app) {
     
     let delete_password = req.body.delete_password;
     
-    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true }, function(err, db) {
+    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
       if (err) {
         // console.log('Database error: ' + err);
         return res.json({ error: 'error' });
@@ -176,7 +176,7 @@ module.exports = function (app) {
     
     let thread_id = req.query.thread_id;
     
-    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true }, function(err, db) {
+    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
       if (err) {
         // console.log('Database error: ' + err);
         return res.json({ error: 'error' });
@@ -226,7 +226,7 @@ module.exports = function (app) {
     
     let date = new Date();
     
-    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true }, function(err, db) {
+    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
       if (err) {
         // console.log('Database error: ' + err);
         return res.json({ error: 'error' });
@@ -273,7 +273,7 @@ module.exports = function (app) {
     
     let reply_id = req.body.reply_id;
     
-    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true }, function(err, db) {
+    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
       if (err) {
         // console.log('Database error: ' + err);
         return res.json({ error: 'error' });
@@ -325,7 +325,7 @@ module.exports = function (app) {
     
     let delete_password = req.body.delete_password;
     
-    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true }, function(err, db) {
+    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
       if (err) {
         // console.log('Database error: ' + err);
         return res.json({ error: 'error' });
