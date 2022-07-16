@@ -11,6 +11,7 @@
 var expect = require('chai').expect;
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectId;
+const sanitizeHtml = require('sanitize-html');
 
 module.exports = function (app) {
   
@@ -62,7 +63,7 @@ module.exports = function (app) {
       return res.json({ error: 'Text is required' });
     }
     
-    let text = req.body.text;
+    let text = sanitizeHtml(req.body.text);
     
     if (req.body.delete_password === undefined || req.body.delete_password === '') {
       return res.json({ error: 'Delete password is required' });
@@ -216,7 +217,7 @@ module.exports = function (app) {
       return res.json({ error: 'Text is required' });
     }
     
-    let text = req.body.text;
+    let text = sanitizeHtml(req.body.text);
     
     if (req.body.delete_password === undefined || req.body.delete_password === '') {
       return res.json({ error: 'Delete password is required' });
