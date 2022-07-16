@@ -50,7 +50,7 @@
 	$(function() {
 		var currentBoard = window.location.pathname.slice(3).replace(/\/$/, '');
 		var url = '/api/threads/' + currentBoard + '?limit=0';
-		$('#boardTitle').text('Welcome to /b/' + currentBoard);
+		$('#boardTitle').html('Welcome to <a href="/">/</a><a href="/b/' + currentBoard + '">b/' + currentBoard + '</a>');
 		$.ajax({
 			type: 'GET',
 			url: url,
