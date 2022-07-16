@@ -20,6 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(helmet({
+  contentSecurityPolicy: false,
   referrerPolicy: {
     policy: 'same-origin'
   }
