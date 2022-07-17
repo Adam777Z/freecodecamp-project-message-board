@@ -63,7 +63,7 @@ module.exports = function (app) {
       return res.json({ error: 'Text is required' });
     }
     
-    let text = sanitizeHtml(req.body.text);
+    let text = sanitizeHtml(req.body.text).trim();
     
     if (req.body.delete_password === undefined || req.body.delete_password === '') {
       return res.json({ error: 'Delete password is required' });
@@ -217,7 +217,7 @@ module.exports = function (app) {
       return res.json({ error: 'Text is required' });
     }
     
-    let text = sanitizeHtml(req.body.text);
+    let text = sanitizeHtml(req.body.text).trim();
     
     if (req.body.delete_password === undefined || req.body.delete_password === '') {
       return res.json({ error: 'Delete password is required' });
