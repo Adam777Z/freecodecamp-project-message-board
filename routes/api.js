@@ -14,14 +14,14 @@ var ObjectId = require('mongodb').ObjectId;
 const sanitizeHtml = require('sanitize-html');
 
 module.exports = function (app) {
-  
+
   app.route('/api/threads/:board')
   .get(function(req, res) {
     var board = req.params.board;
-    
+
     let limit = (req.query.limit !== undefined && req.query.limit !== '' ? parseInt(req.query.limit) : 10);
-    
-    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
+
+    MongoClient.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
       if (err) {
         // console.log('Database error: ' + err);
         return res.json({ error: 'error' });
@@ -45,12 +45,12 @@ module.exports = function (app) {
         ).toArray(function(err, docs) {
           docs.forEach(function(doc) {
             doc.replycount = doc.replies.length;
-            
+
             if (doc.replycount > 3) {
               doc.replies = doc.replies.slice(-3);
             }
           });
-          
+
           return res.json(docs);
         });
       }
@@ -58,22 +58,22 @@ module.exports = function (app) {
   })
   .post(function(req, res) {
     var board = req.params.board;
-    
+
     if (req.body.text === undefined || req.body.text === '') {
       return res.json({ error: 'Text is required' });
     }
-    
+
     let text = sanitizeHtml(req.body.text).trim();
-    
+
     if (req.body.delete_password === undefined || req.body.delete_password === '') {
       return res.json({ error: 'Delete password is required' });
     }
-    
+
     let delete_password = req.body.delete_password;
-    
+
     let date = new Date();
-    
-    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
+
+    MongoClient.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
       if (err) {
         // console.log('Database error: ' + err);
         return res.json({ error: 'error' });
@@ -96,14 +96,14 @@ module.exports = function (app) {
   })
   .put(function(req, res) {
     var board = req.params.board;
-    
+
     if (req.body.thread_id === undefined || req.body.thread_id === '') {
       return res.json('Thread ID is required');
     }
-    
+
     let thread_id = req.body.thread_id;
-    
-    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
+
+    MongoClient.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
       if (err) {
         // console.log('Database error: ' + err);
         return res.json({ error: 'error' });
@@ -131,20 +131,20 @@ module.exports = function (app) {
   })
   .delete(function(req, res) {
     var board = req.params.board;
-    
+
     if (req.body.thread_id === undefined || req.body.thread_id === '') {
       return res.json({ error: 'Thread ID is required' });
     }
-    
+
     let thread_id = req.body.thread_id;
-    
+
     if (req.body.delete_password === undefined || req.body.delete_password === '') {
       return res.json({ error: 'Delete password is required' });
     }
-    
+
     let delete_password = req.body.delete_password;
-    
-    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
+
+    MongoClient.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
       if (err) {
         // console.log('Database error: ' + err);
         return res.json({ error: 'error' });
@@ -166,18 +166,18 @@ module.exports = function (app) {
       }
     });
   });
-  
+
   app.route('/api/replies/:board')
   .get(function(req, res) {
     var board = req.params.board;
-    
+
     if (req.query.thread_id === undefined || req.query.thread_id === '') {
       return res.json({ error: 'Thread ID is required' });
     }
-    
+
     let thread_id = req.query.thread_id;
-    
-    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
+
+    MongoClient.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
       if (err) {
         // console.log('Database error: ' + err);
         return res.json({ error: 'error' });
@@ -206,28 +206,28 @@ module.exports = function (app) {
   })
   .post(function(req, res) {
     var board = req.params.board;
-    
+
     if (req.body.thread_id === undefined || req.body.thread_id === '') {
       return res.json({ error: 'Thread ID is required' });
     }
-    
+
     let thread_id = req.body.thread_id;
-    
+
     if (req.body.text === undefined || req.body.text === '') {
       return res.json({ error: 'Text is required' });
     }
-    
+
     let text = sanitizeHtml(req.body.text).trim();
-    
+
     if (req.body.delete_password === undefined || req.body.delete_password === '') {
       return res.json({ error: 'Delete password is required' });
     }
-    
+
     let delete_password = req.body.delete_password;
-    
+
     let date = new Date();
-    
-    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
+
+    MongoClient.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
       if (err) {
         // console.log('Database error: ' + err);
         return res.json({ error: 'error' });
@@ -261,20 +261,20 @@ module.exports = function (app) {
   })
   .put(function(req, res) {
     var board = req.params.board;
-    
+
     if (req.body.thread_id === undefined || req.body.thread_id === '') {
       return res.json('Thread ID is required');
     }
-    
+
     let thread_id = req.body.thread_id;
-    
+
     if (req.body.reply_id === undefined || req.body.reply_id === '') {
       return res.json('Reply ID is required');
     }
-    
+
     let reply_id = req.body.reply_id;
-    
-    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
+
+    MongoClient.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
       if (err) {
         // console.log('Database error: ' + err);
         return res.json({ error: 'error' });
@@ -307,26 +307,26 @@ module.exports = function (app) {
   })
   .delete(function(req, res) {
     var board = req.params.board;
-    
+
     if (req.body.thread_id === undefined || req.body.thread_id === '') {
       return res.json({ error: 'Thread ID is required' });
     }
-    
+
     let thread_id = req.body.thread_id;
-    
+
     if (req.body.reply_id === undefined || req.body.reply_id === '') {
       return res.json({ error: 'Reply ID is required' });
     }
-    
+
     let reply_id = req.body.reply_id;
-    
+
     if (req.body.delete_password === undefined || req.body.delete_password === '') {
       return res.json({ error: 'Delete password is required' });
     }
-    
+
     let delete_password = req.body.delete_password;
-    
-    MongoClient.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
+
+    MongoClient.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
       if (err) {
         // console.log('Database error: ' + err);
         return res.json({ error: 'error' });
