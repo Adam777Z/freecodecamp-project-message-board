@@ -96,12 +96,17 @@ module.exports = function (app) {
   })
   .put(function(req, res) {
     var board = req.params.board;
+    let thread_id = '';
 
-    if (req.body.thread_id === undefined || req.body.thread_id === '') {
-      return res.json('Thread ID is required');
+    if (req.body.thread_id !== undefined) {
+      thread_id = req.body.thread_id;
+    } else if (req.body.report_id !== undefined) {
+      thread_id = req.body.report_id;
     }
 
-    let thread_id = req.body.thread_id;
+    if (thread_id === '') {
+      return res.send('Thread ID is required');
+    }
 
     MongoClient.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
       if (err) {
@@ -117,12 +122,12 @@ module.exports = function (app) {
               reported: true
             }
           },
-          { returnOriginal: false }, // Return updated object after modify
+          { returnDocument: 'after' }, // Return the updated document
           function(error, result) {
             if (result.ok === 1 && result.value !== null) {
-              return res.json('success');
+              return res.send('reported');
             } else {
-              return res.json('failure');
+              return res.send('failure');
             }
           }
         );
@@ -157,9 +162,9 @@ module.exports = function (app) {
           },
           function(error, result) {
             if (result.ok === 1 && result.value !== null) {
-              return res.json('success');
+              return res.send('success');
             } else {
-              return res.json('incorrect password'); // or it no longer exists (delete unsuccessful)
+              return res.send('incorrect password'); // or it no longer exists (delete unsuccessful)
             }
           }
         );
@@ -251,7 +256,7 @@ module.exports = function (app) {
               }
             }
           },
-          { returnOriginal: false }, // Return updated object after modify
+          { returnDocument: 'after' }, // Return the updated document
           function(err, doc) {
             return res.redirect('/b/' + board + '/' + thread_id);
           }
@@ -263,13 +268,13 @@ module.exports = function (app) {
     var board = req.params.board;
 
     if (req.body.thread_id === undefined || req.body.thread_id === '') {
-      return res.json('Thread ID is required');
+      return res.send('Thread ID is required');
     }
 
     let thread_id = req.body.thread_id;
 
     if (req.body.reply_id === undefined || req.body.reply_id === '') {
-      return res.json('Reply ID is required');
+      return res.send('Reply ID is required');
     }
 
     let reply_id = req.body.reply_id;
@@ -293,12 +298,12 @@ module.exports = function (app) {
               'replies.$.reported': true
             }
           },
-          { returnOriginal: false }, // Return updated object after modify
+          { returnDocument: 'after' }, // Return the updated document
           function(error, result) {
             if (result.ok === 1 && result.value !== null) {
-              return res.json('success');
+              return res.send('reported');
             } else {
-              return res.json('failure');
+              return res.send('failure');
             }
           }
         );
@@ -347,12 +352,12 @@ module.exports = function (app) {
               'replies.$.text': '[deleted]'
             }
           },
-          { returnOriginal: false }, // Return updated object after modify
+          { returnDocument: 'after' }, // Return the updated document
           function(err, doc) {
             if (doc.ok === 1 && doc.value !== null) {
-              return res.json('success');
+              return res.send('success');
             } else {
-              return res.json('incorrect password'); // or it no longer exists (delete unsuccessful)
+              return res.send('incorrect password'); // or it no longer exists (delete unsuccessful)
             }
           }
         );
