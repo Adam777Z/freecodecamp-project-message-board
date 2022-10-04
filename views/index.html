@@ -40,9 +40,35 @@
 								<li>I can report a reply and change its reported value to true by sending a <b>PUT</b> request to <i>/api/replies/{board}</i> and pass along the <code>thread_id</code> &amp; <code>reply_id</code>. (Text response will be 'success')</li>
 								<li>Complete functional tests that wholly test routes and pass.</li>
 							</ol>
-							<p>
-								<img src="/public/api-table-screenshot.png">
-							</p>
+							<div class="table-responsive-sm">
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col">API</th>
+											<th scope="col">GET</th>
+											<th scope="col">POST</th>
+											<th scope="col">PUT</th>
+											<th scope="col">DELETE</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">/api/threads/{board}</th>
+											<td>list recent threads</td>
+											<td>create thread</td>
+											<td>report thread</td>
+											<td>delete thread with password</td>
+										</tr>
+										<tr>
+											<th scope="row">/api/replies/{board}</th>
+											<td>show all replies on thread</td>
+											<td>create reply on thread</td>
+											<td>report reply on thread</td>
+											<td>change reply to '[deleted]' on thread</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 							<h3>Example GET usage:</h3>
 							<ul>
 								<li><code>/api/threads/{board}</code></li>
