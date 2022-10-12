@@ -14,21 +14,19 @@
 </head>
 <body>
 	<div class="container">
-		<div class="row">
-			<div class="col">
-				<div class="jumbotron p-4">
-					<div class="container">
-						<header>
-							<h1 id="threadTitle" class="text-center"></h1>
-						</header>
-						<br>
+		<div class="p-4 my-4 bg-light rounded-3">
+			<div class="row">
+				<div class="col">
+					<header>
+						<h1 id="threadTitle" class="text-center"></h1>
+					</header>
+					<br>
 
-						<div id="boardDisplay"></div>
+					<div id="boardDisplay"></div>
 
-						<hr>
+					<hr>
 
-						<div class="footer text-center">by <a href="https://www.freecodecamp.org" target="_blank">freeCodeCamp</a> (ISQA3) & <a href="https://www.freecodecamp.org/adam777" target="_blank">Adam</a> | <a href="https://github.com/Adam777Z/freecodecamp-project-message-board" target="_blank">GitHub</a></div>
-					</div>
+					<div class="footer text-center">by <a href="https://www.freecodecamp.org" target="_blank">freeCodeCamp</a> (ISQA3) & <a href="https://www.freecodecamp.org/adam777" target="_blank">Adam</a> | <a href="https://github.com/Adam777Z/freecodecamp-project-message-board" target="_blank">GitHub</a></div>
 				</div>
 			</div>
 		</div>
@@ -73,19 +71,19 @@
 									'<div class="card-footer text-muted">',
 										'<div class="row align-items-center">',
 											'<div class="col">',
-												'<p class="mb-2"><span class="font-weight-semibold">Created on:</span> <span>' + rep.created_on + '</span></p>',
-												'<p class="id m-0"><span class="font-weight-semibold">Reply ID:</span> <span>' + rep._id + '</span></p>',
+												'<p class="mb-2"><span class="fw-semibold">Created on:</span> <span>' + rep.created_on + '</span></p>',
+												'<p class="id m-0"><span class="fw-semibold">Reply ID:</span> <span>' + rep._id + '</span></p>',
 											'</div>',
-											'<div class="col text-right">',
-												'<form id="reportReply" class="form-inline d-inline-block mr-4">',
+											'<div class="col d-flex justify-content-end">',
+												'<form id="reportReply" class="d-flex align-items-center me-4">',
 													'<input type="hidden" name="thread_id" value="' + ele._id + '">',
 													'<input type="hidden" name="reply_id" value="' + rep._id + '">',
 													'<input class="btn btn-warning" type="submit" value="Report reply">',
 												'</form>',
-												'<form id="deleteReply" class="form-inline d-inline-block">',
+												'<form id="deleteReply" class="d-flex align-items-center">',
 													'<input type="hidden" name="thread_id" value="' + ele._id + '" required>',
 													'<input type="hidden" name="reply_id" value="' + rep._id + '" required>',
-													'<input class="form-control mr-2" type="text" name="delete_password" placeholder="Password" required>',
+													'<input class="form-control me-2" type="text" name="delete_password" placeholder="Password" required>',
 													'<input class="btn btn-danger" type="submit" value="Delete reply">',
 												'</form>',
 											'</div>',
@@ -99,10 +97,8 @@
 								'<div class="newReply mt-3">',
 									'<form id="newReply" class="text-center" action="/api/replies/' + currentURL[0] + '/" method="post">',
 										'<input type="hidden" name="thread_id" value="' + ele._id + '">',
-										'<div class="form-group mb-0">',
-											'<textarea class="form-control mb-2" rows="5" cols="80" name="text" placeholder="Quick reply..." required></textarea>',
-											'<input class="form-control mb-2" type="text" name="delete_password" placeholder="Password to delete" required>',
-										'</div>',
+										'<textarea class="form-control mb-2" rows="5" cols="80" name="text" placeholder="Quick reply..." required></textarea>',
+										'<input class="form-control mb-2" type="text" name="delete_password" placeholder="Password to delete" required>',
 										'<input class="btn btn-primary" type="submit" value="Submit">',
 									'</form>',
 								'</div>',
@@ -111,17 +107,17 @@
 						'<div class="card-footer text-muted">',
 							'<div class="row align-items-center">',
 								'<div class="col">',
-									'<p class="mb-2"><span class="font-weight-semibold">Created on:</span> <span>' + ele.created_on + '</span></p>',
-									'<p class="m-0"><span class="font-weight-semibold">Thread ID:</span> <span>' + ele._id + '</span></p>',
+									'<p class="mb-2"><span class="fw-semibold">Created on:</span> <span>' + ele.created_on + '</span></p>',
+									'<p class="m-0"><span class="fw-semibold">Thread ID:</span> <span>' + ele._id + '</span></p>',
 								'</div>',
-								'<div class="col text-right">',
-									'<form id="reportThread" class="form-inline d-inline-block mr-4">',
+								'<div class="col d-flex justify-content-end">',
+									'<form id="reportThread" class="d-flex align-items-center me-4">',
 										'<input type="hidden" name="thread_id" value="' + ele._id + '">',
 										'<input class="btn btn-warning" type="submit" value="Report thread">',
 									'</form>',
-									'<form id="deleteThread" class="form-inline d-inline-block">',
+									'<form id="deleteThread" class="d-flex align-items-center">',
 										'<input type="hidden" name="thread_id" value="' + ele._id + '" required>',
-										'<input class="form-control mr-2" type="text" name="delete_password" placeholder="Password" required>',
+										'<input class="form-control me-2" type="text" name="delete_password" placeholder="Password" required>',
 										'<input class="btn btn-danger" type="submit" value="Delete thread">',
 									'</form>',
 								'</div>',

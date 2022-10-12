@@ -35,10 +35,6 @@ body {
 	margin: 50px;
 } */
 
-.jumbotron {
-	margin-top: 2rem;
-}
-
 .table,
 .table th,
 .table td {
@@ -78,10 +74,6 @@ body {
 	.table {
 		white-space: nowrap;
 	}
-}
-
-.font-weight-semibold {
-	font-weight: 600 !important;
 }
 
 #boardDisplay #deleteThread input[name="delete_password"],
