@@ -80,71 +80,71 @@
 
 					<div id="testui">
 						<h2>API Tests:</h2>
-						<div class="row">
+						<div class="row text-center">
 							<div class="col">
 								<h4>New thread</h4>
 								<h5>(POST /api/threads/:board)</h5>
-								<form id="newThread" class="text-center" action="/api/threads/test" method="post">
-									<input id="board1" class="form-control mb-2" type="text" name="board" placeholder="Board" required>
+								<form class="test-form-new" action="/api/threads/" method="post">
+									<input type="text" class="form-control mb-2" name="board" placeholder="Board" required>
 									<textarea class="form-control mb-2" name="text" placeholder="Thread text..." required></textarea>
-									<input class="form-control mb-2" type="text" name="delete_password" placeholder="Password to delete" required>
-									<input class="btn btn-primary" type="submit" value="Submit">
+									<input type="text" class="form-control mb-2" name="delete_password" placeholder="Password to delete" required>
+									<input type="submit" class="btn btn-primary" value="Submit">
 								</form>
 							</div>
 							<div class="col">
 								<h4>Report thread</h4>
 								<h5>(PUT /api/threads/:board)</h5>
-								<form id="reportThread" class="text-center">
-									<input id="board2" class="form-control mb-2" type="text" name="board" placeholder="Board" required>
-									<input class="form-control mb-2" type="text" name="thread_id" placeholder="ID of thread to report" required>
-									<input class="btn btn-warning" type="submit" value="Submit">
+								<form class="test-form" action="/api/threads/" method="put">
+									<input type="text" class="form-control mb-2" name="board" placeholder="Board" required>
+									<input type="text" class="form-control mb-2" name="thread_id" placeholder="ID of thread to report" required>
+									<input type="submit" class="btn btn-warning" value="Submit">
 								</form>
 							</div>
 							<div class="col">
 								<h4>Delete thread</h4>
 								<h5>(DELETE /api/threads/:board)</h5>
-								<form id="deleteThread" class="text-center">
-									<input id="board3" class="form-control mb-2" type="text" name="board" placeholder="Board" required>
-									<input class="form-control mb-2" type="text" name="thread_id" placeholder="ID of thread to delete" required>
-									<input class="form-control mb-2" type="text" name="delete_password" placeholder="Password" required>
-									<input class="btn btn-danger" type="submit" value="Submit">
+								<form class="test-form" action="/api/threads/" method="delete">
+									<input type="text" class="form-control mb-2" name="board" placeholder="Board" required>
+									<input type="text" class="form-control mb-2" name="thread_id" placeholder="ID of thread to delete" required>
+									<input type="text" class="form-control mb-2" name="delete_password" placeholder="Password" required>
+									<input type="submit" class="btn btn-danger" value="Submit">
 								</form>
 							</div>
 						</div>
 
 						<hr>
 
-						<div class="row">
+						<div class="row text-center">
 							<div class="col">
 								<h4>New reply</h4>
 								<h5>(POST /api/replies/:board)</h5>
-								<form id="newReply" class="text-center" action="/api/replies/test" method="post">
-									<input id="board4" class="form-control mb-2" type="text" name="board" placeholder="Board" required>
-									<input class="form-control mb-2" type="text" name="thread_id" placeholder="Thread ID" required>
+								<form class="test-form-new" action="/api/replies/" method="post">
+									<input type="text" class="form-control mb-2" name="board" placeholder="Board" required>
+									<input type="text" class="form-control mb-2" name="thread_id" placeholder="Thread ID" required>
 									<textarea class="form-control mb-2" name="text" placeholder="Reply text..." required></textarea>
-									<input class="form-control mb-2" type="text" name="delete_password" placeholder="Password to delete" required>
-									<input class="btn btn-primary" type="submit" value="Submit">
+									<input type="text" class="form-control mb-2" name="delete_password" placeholder="Password to delete" required>
+									<input type="submit" class="btn btn-primary" value="Submit">
 								</form>
 							</div>
 							<div class="col">
 								<h4>Report reply</h4>
 								<h5>(PUT /api/replies/:board)</h5>
-								<form id="reportReply" class="text-center">
-									<input id="board5" class="form-control mb-2" type="text" name="board" placeholder="Board" required>
-									<input class="form-control mb-2" type="text" name="thread_id" placeholder="Thread ID" required>
-									<input class="form-control mb-2" type="text" name="reply_id" placeholder="ID of reply to report" required>
-									<input class="btn btn-warning" type="submit" value="Submit">
+								<form class="test-form" action="/api/replies/" method="put">
+									<input type="text" class="form-control mb-2" name="board" placeholder="Board" required>
+									<input type="text" class="form-control mb-2" name="thread_id" placeholder="Thread ID" required>
+									<input type="text" class="form-control mb-2" name="reply_id" placeholder="ID of reply to report" required>
+									<input type="submit" class="btn btn-warning" value="Submit">
 								</form>
 							</div>
 							<div class="col">
 								<h4>Delete reply</h4>
 								<h5>(DELETE /api/replies/:board)</h5>
-								<form id="deleteReply" class="text-center">
-									<input id="board6" class="form-control mb-2" type="text" name="board" placeholder="Board" required>
-									<input class="form-control mb-2" type="text" name="thread_id" placeholder="Thread ID" required>
-									<input class="form-control mb-2" type="text" name="reply_id" placeholder="ID of reply to delete" required>
-									<input class="form-control mb-2" type="text" name="delete_password" placeholder="Password" required>
-									<input class="btn btn-danger" type="submit" value="Submit">
+								<form class="test-form" action="/api/replies/" method="delete">
+									<input type="text" class="form-control mb-2" name="board" placeholder="Board" required>
+									<input type="text" class="form-control mb-2" name="thread_id" placeholder="Thread ID" required>
+									<input type="text" class="form-control mb-2" name="reply_id" placeholder="ID of reply to delete" required>
+									<input type="text" class="form-control mb-2" name="delete_password" placeholder="Password" required>
+									<input type="submit" class="btn btn-danger" value="Submit">
 								</form>
 							</div>
 						</div>
@@ -160,149 +160,56 @@
 
 	<script>
 	document.addEventListener('DOMContentLoaded', (event) => {
-		document.querySelector('#newThread').addEventListener('submit', (event2) => {
-			let board = document.querySelector('#board1').value;
-			event2.target.setAttribute('action', '/api/threads/' + board);
-		});
+		// document.querySelector('.newThread').addEventListener('submit', (event2) => {
+		// 	let board = event2.target.querySelector('[name="board"]').value;
+		// 	event2.target.setAttribute('action', '/api/threads/' + board);
+		// });
 
-		document.querySelector('#newReply').addEventListener('submit', (event2) => {
-			let board = document.querySelector('#board4').value;
-			event2.target.setAttribute('action', '/api/replies/' + board);
-		});
+		// document.querySelector('.newReply').addEventListener('submit', (event2) => {
+		// 	let board = event2.target.querySelector('[name="board"]').value;
+		// 	event2.target.setAttribute('action', '/api/replies/' + board);
+		// });
 
-		document.querySelector('#reportThread').addEventListener('submit', (event2) => {
-			event2.preventDefault();
-
-			let url = '/api/threads/' + document.querySelector('#board2').value;
-
-			fetch(url, {
-				'method': 'PUT',
-				'body': new URLSearchParams(new FormData(event2.target))
-			})
-			.then((response) => {
-				if (response['ok']) {
-					return response.text();
-				} else {
-					throw 'Error';
-				}
-			})
-			.then((data) => {
-				try {
-					data = JSON.parse(data);
-				} catch (error) {
-					// console.log(error);
-				}
-
-				if (data['error'] !== undefined) {
-					data = data['error'];
-				}
-
-				alert(data);
-			})
-			.catch((error) => {
-				console.log(error);
+		document.querySelectorAll('.test-form-new').forEach((e) => {
+			e.addEventListener('submit', (event2) => {
+				let url = event2.target.getAttribute('action') + event2.target.querySelector('[name="board"]').value;
+				event2.submitter.setAttribute('formaction', url);
 			});
 		});
 
-		document.querySelector('#deleteThread').addEventListener('submit', (event2) => {
-			event2.preventDefault();
+		document.querySelectorAll('.test-form').forEach((e) => {
+			e.addEventListener('submit', (event2) => {
+				event2.preventDefault();
 
-			let url = '/api/threads/' + document.querySelector('#board3').value;
+				let url = event2.target.getAttribute('action') + event2.target.querySelector('[name="board"]').value;
 
-			fetch(url, {
-				'method': 'DELETE',
-				'body': new URLSearchParams(new FormData(event2.target))
-			})
-			.then((response) => {
-				if (response['ok']) {
-					return response.text();
-				} else {
-					throw 'Error';
-				}
-			})
-			.then((data) => {
-				try {
-					data = JSON.parse(data);
-				} catch (error) {
-					// console.log(error);
-				}
+				fetch(url, {
+					'method': event2.target.getAttribute('method').toUpperCase(),
+					'body': new URLSearchParams(new FormData(event2.target))
+				})
+				.then((response) => {
+					if (response['ok']) {
+						return response.text();
+					} else {
+						throw 'Error';
+					}
+				})
+				.then((data) => {
+					try {
+						data = JSON.parse(data);
+					} catch (error) {
+						// console.log(error);
+					}
 
-				if (data['error'] !== undefined) {
-					data = data['error'];
-				}
+					if (data['error'] !== undefined) {
+						data = data['error'];
+					}
 
-				alert(data);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-		});
-
-		document.querySelector('#reportReply').addEventListener('submit', (event2) => {
-			event2.preventDefault();
-
-			let url = '/api/replies/' + document.querySelector('#board5').value;
-
-			fetch(url, {
-				'method': 'PUT',
-				'body': new URLSearchParams(new FormData(event2.target))
-			})
-			.then((response) => {
-				if (response['ok']) {
-					return response.text();
-				} else {
-					throw 'Error';
-				}
-			})
-			.then((data) => {
-				try {
-					data = JSON.parse(data);
-				} catch (error) {
-					// console.log(error);
-				}
-
-				if (data['error'] !== undefined) {
-					data = data['error'];
-				}
-
-				alert(data);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-		});
-
-		document.querySelector('#deleteReply').addEventListener('submit', (event2) => {
-			event2.preventDefault();
-
-			let url = '/api/replies/' + document.querySelector('#board6').value;
-
-			fetch(url, {
-				'method': 'DELETE',
-				'body': new URLSearchParams(new FormData(event2.target))
-			})
-			.then((response) => {
-				if (response['ok']) {
-					return response.text();
-				} else {
-					throw 'Error';
-				}
-			})
-			.then((data) => {
-				try {
-					data = JSON.parse(data);
-				} catch (error) {
-					// console.log(error);
-				}
-
-				if (data['error'] !== undefined) {
-					data = data['error'];
-				}
-
-				alert(data);
-			})
-			.catch((error) => {
-				console.log(error);
+					alert(data);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
 			});
 		});
 	});
