@@ -56,99 +56,89 @@
 			}
 		})
 		.then((data) => {
-			var boardThreads = [];
+			let html = '';
 
-			//
-			// THIS ARRAY SET UP IS FOR CODE READABILITIES AND TESTING!
-			// THIS IS NOT WHAT IT WOULD LOOK LIKE TO GO LIVE
-			//
+			data.forEach((elem) => {
+				html += `
+				<div class="card thread mb-2">
+					<h5 class="card-header">${elem['text']}</h5>
+					<div class="card-body">
+						<div class="replies">
+				`;
 
-			data.forEach(function(ele) {
-				// console.log(ele); // Can I use TypeScript please?!
-				var thread = [];
-
-				thread.push(
-					'<div class="card thread mb-2">',
-						'<h5 class="card-header">' + ele['text'] + '</h5>',
-						'<div class="card-body">',
-							'<div class="replies">'
-				);
-
-				var hiddenCount = ele['replycount'] - 3;
+				let hiddenCount = elem['replycount'] - 3;
 				if (hiddenCount < 1) {
 					hiddenCount = 0;
 				}
 
-				thread.push('<p class="card-text">' + ele['replycount'] + ' replies total (' + hiddenCount + ' hidden) - <a href="/b/' + currentBoard + '/' + ele['_id'] + '">See the full thread here</a>.</p>');
+				html += `<p class="card-text">${elem['replycount']} replies total (${hiddenCount} hidden) - <a href="/b/${currentBoard}/${elem['_id']}">See the full thread here</a>.</p>`;
 
-				ele['replies'].forEach(function(rep) {
-					thread.push(
-								'<div class="card reply mb-2">',
-									'<div class="card-body">',
-										'<p class="card-text">' + rep['text'] + '</p>',
-									'</div>',
-									'<div class="card-footer text-muted">',
-										'<div class="row align-items-center">',
-											'<div class="col">',
-												'<p class="mb-2"><span class="fw-semibold">Created on:</span> <span>' + rep['created_on'] + '</span></p>',
-												'<p class="id m-0"><span class="fw-semibold">Reply ID:</span> <span>' + rep['_id'] + '</span></p>',
-											'</div>',
-											'<div class="col d-flex justify-content-end">',
-												'<form class="reportReply me-4">',
-													'<input type="hidden" name="thread_id" value="' + ele['_id'] + '">',
-													'<input type="hidden" name="reply_id" value="' + rep['_id'] + '">',
-													'<input class="btn btn-warning" type="submit" value="Report reply">',
-												'</form>',
-												'<form class="deleteReply d-flex">',
-													'<input type="hidden" name="thread_id" value="' + ele['_id'] + '" required>',
-													'<input type="hidden" name="reply_id" value="' + rep['_id'] + '" required>',
-													'<input class="form-control me-2" type="text" name="delete_password" placeholder="Password" required>',
-													'<input class="btn btn-danger" type="submit" value="Delete reply">',
-												'</form>',
-											'</div>',
-										'</div>',
-									'</div>',
-								'</div>'
-					);
+				elem['replies'].forEach((reply) => {
+					html += `
+							<div class="card reply mb-2">
+								<div class="card-body">
+									<p class="card-text">${reply['text']}</p>
+								</div>
+								<div class="card-footer text-muted">
+									<div class="row align-items-center">
+										<div class="col">
+											<p class="mb-2"><span class="fw-semibold">Created on:</span> <span>${reply['created_on']}</span></p>
+											<p class="id m-0"><span class="fw-semibold">Reply ID:</span> <span>${reply['_id']}</span></p>
+										</div>
+										<div class="col d-flex justify-content-end">
+											<form class="reportReply me-4">
+												<input type="hidden" name="thread_id" value="${elem['_id']}">
+												<input type="hidden" name="reply_id" value="${reply['_id']}">
+												<input class="btn btn-warning" type="submit" value="Report reply">
+											</form>
+											<form class="deleteReply d-flex">
+												<input type="hidden" name="thread_id" value="${elem['_id']}" required>
+												<input type="hidden" name="reply_id" value="${reply['_id']}" required>
+												<input class="form-control me-2" type="text" name="delete_password" placeholder="Password" required>
+												<input class="btn btn-danger" type="submit" value="Delete reply">
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+					`;
 				});
 
-				thread.push(
-								'<div class="newReply mt-3">',
-									'<form id="newReply" class="text-center" action="/api/replies/' + currentBoard + '/" method="post">',
-										'<input type="hidden" name="thread_id" value="' + ele['_id'] + '">',
-										'<textarea class="form-control mb-2" rows="5" cols="80" name="text" placeholder="Quick reply..." required></textarea>',
-										'<input class="form-control mb-2" type="text" name="delete_password" placeholder="Password to delete" required>',
-										'<input class="btn btn-primary" type="submit" value="Submit">',
-									'</form>',
-								'</div>',
-							'</div>',
-						'</div>',
-						'<div class="card-footer text-muted">',
-							'<div class="row align-items-center">',
-								'<div class="col">',
-									'<p class="mb-2"><span class="fw-semibold">Created on:</span> <span>' + ele['created_on'] + '</span></p>',
-									'<p class="m-0"><span class="fw-semibold">Thread ID:</span> <span>' + ele['_id'] + '</span></p>',
-								'</div>',
-								'<div class="col d-flex justify-content-end">',
-									'<form class="reportThread me-4">',
-										'<input type="hidden" name="thread_id" value="' + ele['_id'] + '">',
-										'<input class="btn btn-warning" type="submit" value="Report thread">',
-									'</form>',
-									'<form class="deleteThread d-flex">',
-										'<input type="hidden" name="thread_id" value="' + ele['_id'] + '" required>',
-										'<input class="form-control me-2" type="text" name="delete_password" placeholder="Password" required>',
-										'<input class="btn btn-danger" type="submit" value="Delete thread">',
-									'</form>',
-								'</div>',
-							'</div>',
-						'</div>',
-					'</div>'
-				);
-
-				boardThreads.push(thread.join(''));
+				html += `
+							<div class="newReply mt-3">
+								<form id="newReply" class="text-center" action="/api/replies/${currentBoard}/" method="post">
+									<input type="hidden" name="thread_id" value="${elem['_id']}">
+									<textarea class="form-control mb-2" rows="5" cols="80" name="text" placeholder="Quick reply..." required></textarea>
+									<input class="form-control mb-2" type="text" name="delete_password" placeholder="Password to delete" required>
+									<input class="btn btn-primary" type="submit" value="Submit">
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="card-footer text-muted">
+						<div class="row align-items-center">
+							<div class="col">
+								<p class="mb-2"><span class="fw-semibold">Created on:</span> <span>${elem['created_on']}</span></p>
+								<p class="m-0"><span class="fw-semibold">Thread ID:</span> <span>${elem['_id']}</span></p>
+							</div>
+							<div class="col d-flex justify-content-end">
+								<form class="reportThread me-4">
+									<input type="hidden" name="thread_id" value="${elem['_id']}">
+									<input class="btn btn-warning" type="submit" value="Report thread">
+								</form>
+								<form class="deleteThread d-flex">
+									<input type="hidden" name="thread_id" value="${elem['_id']}" required>
+									<input class="form-control me-2" type="text" name="delete_password" placeholder="Password" required>
+									<input class="btn btn-danger" type="submit" value="Delete thread">
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				`;
 			});
 
-			document.querySelector('#boardDisplay').innerHTML = boardThreads.join('');
+			document.querySelector('#boardDisplay').innerHTML = html;
 		})
 		.catch((error) => {
 			console.log(error);
