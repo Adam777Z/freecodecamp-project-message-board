@@ -9,8 +9,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/public/bootstrap.min.css">
 	<link rel="stylesheet" href="/public/style.css">
-	<!-- Your web app is https, so your scripts need to be too -->
-	<script src="/public/jquery.min.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -41,161 +39,261 @@
 	</div>
 
 	<script>
-	$(function() {
+	document.addEventListener('DOMContentLoaded', (event) => {
 		var currentBoard = window.location.pathname.slice(3).replace(/\/$/, '');
 		var url = '/api/threads/' + currentBoard + '?limit=0';
-		$('#boardTitle').html('Welcome to <a href="/">/</a><a href="/b/' + currentBoard + '">b/' + currentBoard + '</a>');
-		$.ajax({
-			type: 'GET',
-			url: url,
-			success: function(data) {
-				var boardThreads = [];
-				//
-				// THIS ARRAY SET UP IS FOR CODE READABILITIES AND TESTING!
-				// THIS IS NOT WHAT IT WOULD LOOK LIKE TO GO LIVE
-				//
-				data.forEach(function(ele) {
-					// console.log(ele); // Can I use TypeScript please?!
-					var thread = [];
 
+		document.querySelector('#boardTitle').innerHTML = 'Welcome to <a href="/">/</a><a href="/b/' + currentBoard + '">b/' + currentBoard + '</a>';
+
+		fetch(url, {
+			'method': 'GET'
+		})
+		.then((response) => {
+			if (response['ok']) {
+				return response.json();
+			} else {
+				throw 'Error';
+			}
+		})
+		.then((data) => {
+			var boardThreads = [];
+
+			//
+			// THIS ARRAY SET UP IS FOR CODE READABILITIES AND TESTING!
+			// THIS IS NOT WHAT IT WOULD LOOK LIKE TO GO LIVE
+			//
+
+			data.forEach(function(ele) {
+				// console.log(ele); // Can I use TypeScript please?!
+				var thread = [];
+
+				thread.push(
+					'<div class="card thread mb-2">',
+						'<h5 class="card-header">' + ele['text'] + '</h5>',
+						'<div class="card-body">',
+							'<div class="replies">'
+				);
+
+				var hiddenCount = ele['replycount'] - 3;
+				if (hiddenCount < 1) {
+					hiddenCount = 0;
+				}
+
+				thread.push('<p class="card-text">' + ele['replycount'] + ' replies total (' + hiddenCount + ' hidden) - <a href="/b/' + currentBoard + '/' + ele['_id'] + '">See the full thread here</a>.</p>');
+
+				ele['replies'].forEach(function(rep) {
 					thread.push(
-						'<div class="card thread mb-2">',
-							'<h5 class="card-header">' + ele.text + '</h5>',
-							'<div class="card-body">',
-								'<div class="replies">'
-					);
-
-					var hiddenCount = ele.replycount - 3;
-					if (hiddenCount < 1) {
-						hiddenCount = 0;
-					}
-
-					thread.push('<p class="card-text">' + ele.replycount + ' replies total (' + hiddenCount + ' hidden) - <a href="/b/' + currentBoard + '/' + ele._id + '">See the full thread here</a>.</p>');
-
-					ele.replies.forEach(function(rep) {
-						thread.push(
-									'<div class="card reply mb-2">',
-										'<div class="card-body">',
-											'<p class="card-text">' + rep.text + '</p>',
-										'</div>',
-										'<div class="card-footer text-muted">',
-											'<div class="row align-items-center">',
-												'<div class="col">',
-													'<p class="mb-2"><span class="fw-semibold">Created on:</span> <span>' + rep.created_on + '</span></p>',
-													'<p class="id m-0"><span class="fw-semibold">Reply ID:</span> <span>' + rep._id + '</span></p>',
-												'</div>',
-												'<div class="col d-flex justify-content-end">',
-													'<form id="reportReply" class="me-4">',
-														'<input type="hidden" name="thread_id" value="' + ele._id + '">',
-														'<input type="hidden" name="reply_id" value="' + rep._id + '">',
-														'<input class="btn btn-warning" type="submit" value="Report reply">',
-													'</form>',
-													'<form id="deleteReply" class="d-flex">',
-														'<input type="hidden" name="thread_id" value="' + ele._id + '" required>',
-														'<input type="hidden" name="reply_id" value="' + rep._id + '" required>',
-														'<input class="form-control me-2" type="text" name="delete_password" placeholder="Password" required>',
-														'<input class="btn btn-danger" type="submit" value="Delete reply">',
-													'</form>',
-												'</div>',
+								'<div class="card reply mb-2">',
+									'<div class="card-body">',
+										'<p class="card-text">' + rep['text'] + '</p>',
+									'</div>',
+									'<div class="card-footer text-muted">',
+										'<div class="row align-items-center">',
+											'<div class="col">',
+												'<p class="mb-2"><span class="fw-semibold">Created on:</span> <span>' + rep['created_on'] + '</span></p>',
+												'<p class="id m-0"><span class="fw-semibold">Reply ID:</span> <span>' + rep['_id'] + '</span></p>',
+											'</div>',
+											'<div class="col d-flex justify-content-end">',
+												'<form class="reportReply me-4">',
+													'<input type="hidden" name="thread_id" value="' + ele['_id'] + '">',
+													'<input type="hidden" name="reply_id" value="' + rep['_id'] + '">',
+													'<input class="btn btn-warning" type="submit" value="Report reply">',
+												'</form>',
+												'<form class="deleteReply d-flex">',
+													'<input type="hidden" name="thread_id" value="' + ele['_id'] + '" required>',
+													'<input type="hidden" name="reply_id" value="' + rep['_id'] + '" required>',
+													'<input class="form-control me-2" type="text" name="delete_password" placeholder="Password" required>',
+													'<input class="btn btn-danger" type="submit" value="Delete reply">',
+												'</form>',
 											'</div>',
 										'</div>',
-									'</div>'
-						);
-					});
-
-					thread.push(
-									'<div class="newReply mt-3">',
-										'<form id="newReply" class="text-center" action="/api/replies/' + currentBoard + '/" method="post">',
-											'<input type="hidden" name="thread_id" value="' + ele._id + '">',
-											'<textarea class="form-control mb-2" rows="5" cols="80" name="text" placeholder="Quick reply..." required></textarea>',
-											'<input class="form-control mb-2" type="text" name="delete_password" placeholder="Password to delete" required>',
-											'<input class="btn btn-primary" type="submit" value="Submit">',
-										'</form>',
 									'</div>',
-								'</div>',
-							'</div>',
-							'<div class="card-footer text-muted">',
-								'<div class="row align-items-center">',
-									'<div class="col">',
-										'<p class="mb-2"><span class="fw-semibold">Created on:</span> <span>' + ele.created_on + '</span></p>',
-										'<p class="m-0"><span class="fw-semibold">Thread ID:</span> <span>' + ele._id + '</span></p>',
-									'</div>',
-									'<div class="col d-flex justify-content-end">',
-										'<form id="reportThread" class="me-4">',
-											'<input type="hidden" name="thread_id" value="' + ele._id + '">',
-											'<input class="btn btn-warning" type="submit" value="Report thread">',
-										'</form>',
-										'<form id="deleteThread" class="d-flex">',
-											'<input type="hidden" name="thread_id" value="' + ele._id + '" required>',
-											'<input class="form-control me-2" type="text" name="delete_password" placeholder="Password" required>',
-											'<input class="btn btn-danger" type="submit" value="Delete thread">',
-										'</form>',
-									'</div>',
-								'</div>',
-							'</div>',
-						'</div>'
+								'</div>'
 					);
-
-					boardThreads.push(thread.join(''));
 				});
-				$('#boardDisplay').html(boardThreads.join(''));
+
+				thread.push(
+								'<div class="newReply mt-3">',
+									'<form id="newReply" class="text-center" action="/api/replies/' + currentBoard + '/" method="post">',
+										'<input type="hidden" name="thread_id" value="' + ele['_id'] + '">',
+										'<textarea class="form-control mb-2" rows="5" cols="80" name="text" placeholder="Quick reply..." required></textarea>',
+										'<input class="form-control mb-2" type="text" name="delete_password" placeholder="Password to delete" required>',
+										'<input class="btn btn-primary" type="submit" value="Submit">',
+									'</form>',
+								'</div>',
+							'</div>',
+						'</div>',
+						'<div class="card-footer text-muted">',
+							'<div class="row align-items-center">',
+								'<div class="col">',
+									'<p class="mb-2"><span class="fw-semibold">Created on:</span> <span>' + ele['created_on'] + '</span></p>',
+									'<p class="m-0"><span class="fw-semibold">Thread ID:</span> <span>' + ele['_id'] + '</span></p>',
+								'</div>',
+								'<div class="col d-flex justify-content-end">',
+									'<form class="reportThread me-4">',
+										'<input type="hidden" name="thread_id" value="' + ele['_id'] + '">',
+										'<input class="btn btn-warning" type="submit" value="Report thread">',
+									'</form>',
+									'<form class="deleteThread d-flex">',
+										'<input type="hidden" name="thread_id" value="' + ele['_id'] + '" required>',
+										'<input class="form-control me-2" type="text" name="delete_password" placeholder="Password" required>',
+										'<input class="btn btn-danger" type="submit" value="Delete thread">',
+									'</form>',
+								'</div>',
+							'</div>',
+						'</div>',
+					'</div>'
+				);
+
+				boardThreads.push(thread.join(''));
+			});
+
+			document.querySelector('#boardDisplay').innerHTML = boardThreads.join('');
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+
+		document.querySelector('#newThread').addEventListener('submit', (event2) => {
+			event2.target.setAttribute('action', '/api/threads/' + currentBoard);
+		});
+
+		document.querySelector('#boardDisplay').addEventListener('submit', (event2) => {
+			if (event2.target.classList.contains('reportReply')) {
+				event2.preventDefault();
+
+				let url = '/api/replies/' + currentBoard;
+
+				fetch(url, {
+					'method': 'PUT',
+					'body': new URLSearchParams(new FormData(event2.target))
+				})
+				.then((response) => {
+					if (response['ok']) {
+						return response.text();
+					} else {
+						throw 'Error';
+					}
+				})
+				.then((data) => {
+					try {
+						data = JSON.parse(data);
+					} catch (error) {
+						// console.log(error);
+					}
+
+					if (data['error'] !== undefined) {
+						data = data['error'];
+					}
+
+					alert(data);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
 			}
-		});
 
-		$('#newThread').submit(function() {
-			$(this).attr('action', '/api/threads/' + currentBoard);
-		});
+			if (event2.target.classList.contains('deleteReply')) {
+				event2.preventDefault();
 
-		$('#boardDisplay').on('submit', '#reportThread', function(e) {
-			e.preventDefault();
-			var url = '/api/threads/' + currentBoard;
-			$.ajax({
-				type: 'PUT',
-				url: url,
-				data: $(this).serialize(),
-				success: function(data) {
-					alert(data)
-				}
-			});
-		});
+				let url = '/api/replies/' + currentBoard;
 
-		$('#boardDisplay').on('submit', '#reportReply', function(e) {
-			e.preventDefault();
-			var url = '/api/replies/' + currentBoard;
-			$.ajax({
-				type: 'PUT',
-				url: url,
-				data: $(this).serialize(),
-				success: function(data) {
-					alert(data)
-				}
-			});
-		});
+				fetch(url, {
+					'method': 'DELETE',
+					'body': new URLSearchParams(new FormData(event2.target))
+				})
+				.then((response) => {
+					if (response['ok']) {
+						return response.text();
+					} else {
+						throw 'Error';
+					}
+				})
+				.then((data) => {
+					try {
+						data = JSON.parse(data);
+					} catch (error) {
+						// console.log(error);
+					}
 
-		$('#boardDisplay').on('submit', '#deleteThread', function(e) {
-			e.preventDefault();
-			var url = '/api/threads/' + currentBoard;
-			$.ajax({
-				type: 'DELETE',
-				url: url,
-				data: $(this).serialize(),
-				success: function(data) {
-					alert(data)
-				}
-			});
-		});
+					if (data['error'] !== undefined) {
+						data = data['error'];
+					}
 
-		$('#boardDisplay').on('submit', '#deleteReply', function(e) {
-			e.preventDefault();
-			var url = '/api/replies/' + currentBoard;
-			$.ajax({
-				type: 'DELETE',
-				url: url,
-				data: $(this).serialize(),
-				success: function(data) {
-					alert(data)
-				}
-			});
+					alert(data);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+			}
+
+			if (event2.target.classList.contains('reportThread')) {
+				event2.preventDefault();
+
+				let url = '/api/threads/' + currentBoard;
+
+				fetch(url, {
+					'method': 'PUT',
+					'body': new URLSearchParams(new FormData(event2.target))
+				})
+				.then((response) => {
+					if (response['ok']) {
+						return response.text();
+					} else {
+						throw 'Error';
+					}
+				})
+				.then((data) => {
+					try {
+						data = JSON.parse(data);
+					} catch (error) {
+						// console.log(error);
+					}
+
+					if (data['error'] !== undefined) {
+						data = data['error'];
+					}
+
+					alert(data);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+			}
+
+			if (event2.target.classList.contains('deleteThread')) {
+				event2.preventDefault();
+
+				let url = '/api/threads/' + currentBoard;
+
+				fetch(url, {
+					'method': 'DELETE',
+					'body': new URLSearchParams(new FormData(event2.target))
+				})
+				.then((response) => {
+					if (response['ok']) {
+						return response.text();
+					} else {
+						throw 'Error';
+					}
+				})
+				.then((data) => {
+					try {
+						data = JSON.parse(data);
+					} catch (error) {
+						// console.log(error);
+					}
+
+					if (data['error'] !== undefined) {
+						data = data['error'];
+					}
+
+					alert(data);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+			}
 		});
 	});
 	</script>

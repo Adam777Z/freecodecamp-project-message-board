@@ -76,7 +76,7 @@ body {
 	}
 }
 
-#boardDisplay #deleteThread input[name="delete_password"],
-#boardDisplay #deleteReply input[name="delete_password"] {
+#boardDisplay .deleteThread input[name="delete_password"],
+#boardDisplay .deleteReply input[name="delete_password"] {
 	width: 200px !important;
 }

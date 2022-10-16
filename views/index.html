@@ -9,8 +9,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/public/bootstrap.min.css">
 	<link rel="stylesheet" href="/public/style.css">
-	<!-- Your web app is https, so your scripts need to be too -->
-	<script src="/public/jquery.min.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -120,7 +118,7 @@
 							<div class="col">
 								<h4>New reply</h4>
 								<h5>(POST /api/replies/:board)</h5>
-								<form id="newReply" class="text-center" action="/api/threads/test" method="post">
+								<form id="newReply" class="text-center" action="/api/replies/test" method="post">
 									<input id="board4" class="form-control mb-2" type="text" name="board" placeholder="Board" required>
 									<input class="form-control mb-2" type="text" name="thread_id" placeholder="Thread ID" required>
 									<textarea class="form-control mb-2" name="text" placeholder="Reply text..." required></textarea>
@@ -161,66 +159,150 @@
 	</div>
 
 	<script>
-	$(function() {
-		$('#newThread').submit(function() {
-			var board = $('#board1').val();
-			$(this).attr('action', '/api/threads/' + board);
+	document.addEventListener('DOMContentLoaded', (event) => {
+		document.querySelector('#newThread').addEventListener('submit', (event2) => {
+			let board = document.querySelector('#board1').value;
+			event2.target.setAttribute('action', '/api/threads/' + board);
 		});
 
-		$('#newReply').submit(function() {
-			var board = $('#board4').val();
-			$(this).attr('action', '/api/replies/' + board);
+		document.querySelector('#newReply').addEventListener('submit', (event2) => {
+			let board = document.querySelector('#board4').value;
+			event2.target.setAttribute('action', '/api/replies/' + board);
 		});
 
-		$('#reportThread').submit(function(e) {
-			e.preventDefault();
-			var url = '/api/threads/' + $('#board2').val();
-			$.ajax({
-				type: 'PUT',
-				url: url,
-				data: $(this).serialize(),
-				success: function(data) {
-					alert(data);
+		document.querySelector('#reportThread').addEventListener('submit', (event2) => {
+			event2.preventDefault();
+
+			let url = '/api/threads/' + document.querySelector('#board2').value;
+
+			fetch(url, {
+				'method': 'PUT',
+				'body': new URLSearchParams(new FormData(event2.target))
+			})
+			.then((response) => {
+				if (response['ok']) {
+					return response.text();
+				} else {
+					throw 'Error';
 				}
+			})
+			.then((data) => {
+				try {
+					data = JSON.parse(data);
+				} catch (error) {
+					// console.log(error);
+				}
+
+				if (data['error'] !== undefined) {
+					data = data['error'];
+				}
+
+				alert(data);
+			})
+			.catch((error) => {
+				console.log(error);
 			});
 		});
 
-		$('#deleteThread').submit(function(e) {
-			e.preventDefault();
-			var url = '/api/threads/' + $('#board3').val();
-			$.ajax({
-				type: 'DELETE',
-				url: url,
-				data: $(this).serialize(),
-				success: function(data) {
-					alert(data);
+		document.querySelector('#deleteThread').addEventListener('submit', (event2) => {
+			event2.preventDefault();
+
+			let url = '/api/threads/' + document.querySelector('#board3').value;
+
+			fetch(url, {
+				'method': 'DELETE',
+				'body': new URLSearchParams(new FormData(event2.target))
+			})
+			.then((response) => {
+				if (response['ok']) {
+					return response.text();
+				} else {
+					throw 'Error';
 				}
+			})
+			.then((data) => {
+				try {
+					data = JSON.parse(data);
+				} catch (error) {
+					// console.log(error);
+				}
+
+				if (data['error'] !== undefined) {
+					data = data['error'];
+				}
+
+				alert(data);
+			})
+			.catch((error) => {
+				console.log(error);
 			});
 		});
 
-		$('#reportReply').submit(function(e) {
-			e.preventDefault();
-			var url = '/api/replies/' + $('#board5').val();
-			$.ajax({
-				type: 'PUT',
-				url: url,
-				data: $(this).serialize(),
-				success: function(data) {
-					alert(data);
+		document.querySelector('#reportReply').addEventListener('submit', (event2) => {
+			event2.preventDefault();
+
+			let url = '/api/replies/' + document.querySelector('#board5').value;
+
+			fetch(url, {
+				'method': 'PUT',
+				'body': new URLSearchParams(new FormData(event2.target))
+			})
+			.then((response) => {
+				if (response['ok']) {
+					return response.text();
+				} else {
+					throw 'Error';
 				}
+			})
+			.then((data) => {
+				try {
+					data = JSON.parse(data);
+				} catch (error) {
+					// console.log(error);
+				}
+
+				if (data['error'] !== undefined) {
+					data = data['error'];
+				}
+
+				alert(data);
+			})
+			.catch((error) => {
+				console.log(error);
 			});
 		});
 
-		$('#deleteReply').submit(function(e) {
-			e.preventDefault();
-			var url = '/api/replies/' + $('#board6').val();
-			$.ajax({
-				type: 'DELETE',
-				url: url,
-				data: $(this).serialize(),
-				success: function(data) {
-					alert(data);
+		document.querySelector('#deleteReply').addEventListener('submit', (event2) => {
+			event2.preventDefault();
+
+			let url = '/api/replies/' + document.querySelector('#board6').value;
+
+			fetch(url, {
+				'method': 'DELETE',
+				'body': new URLSearchParams(new FormData(event2.target))
+			})
+			.then((response) => {
+				if (response['ok']) {
+					return response.text();
+				} else {
+					throw 'Error';
 				}
+			})
+			.then((data) => {
+				try {
+					data = JSON.parse(data);
+				} catch (error) {
+					// console.log(error);
+				}
+
+				if (data['error'] !== undefined) {
+					data = data['error'];
+				}
+
+				alert(data);
+			})
+			.catch((error) => {
+				console.log(error);
 			});
 		});
 	});
