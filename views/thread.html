@@ -159,7 +159,7 @@
 					alert(data);
 
 					if (data == 'success' && (event2.submitter.value == 'Delete reply' || event2.submitter.value == 'Delete thread')) {
-						window.location.reload(true);
+						window.location.reload();
 					}
 				})
 				.catch((error) => {
