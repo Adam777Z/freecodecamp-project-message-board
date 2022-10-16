@@ -75,7 +75,3 @@ body {
 		white-space: nowrap;
 	}
 }
-
-#boardDisplay .board-form input[name="delete_password"] {
-	width: 200px !important;
-}
