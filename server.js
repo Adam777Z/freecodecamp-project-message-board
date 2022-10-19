@@ -23,7 +23,8 @@ app.use(helmet({
 	contentSecurityPolicy: false,
 	referrerPolicy: {
 		policy: 'same-origin'
-	}
+	},
+	frameguard: false
 }));
 
 // Sample front-end
