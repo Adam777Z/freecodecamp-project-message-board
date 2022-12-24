@@ -149,14 +149,14 @@
 		});
 
 		document.querySelector('#boardDisplay').addEventListener('submit', (event2) => {
-			if (event2.target.classList.contains('board-form')) {
+			if (event2.target.closest('.board-form')) {
 				event2.preventDefault();
 
-				let url = event2.target.getAttribute('action');
+				let url = event2.target.closest('.board-form').getAttribute('action');
 
 				fetch(url, {
-					'method': event2.target.getAttribute('method').toUpperCase(),
-					'body': new URLSearchParams(new FormData(event2.target))
+					'method': event2.target.closest('.board-form').getAttribute('method').toUpperCase(),
+					'body': new URLSearchParams(new FormData(event2.target.closest('.board-form')))
 				})
 				.then((response) => {
 					if (response['ok']) {
