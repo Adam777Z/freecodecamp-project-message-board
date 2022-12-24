@@ -50,14 +50,14 @@
 		})
 		.then((data) => {
 			try {
-				data = JSON.parse(data);
+				thread = JSON.parse(data);
 			} catch (error) {
 				// throw error;
-				// Redirect to board on error (thread does not exist)
-				window.location = '/b/' + currentURL[0];
-			}
 
-			thread = data;
+				// Redirect to board on error (thread does not exist)
+				window.location.href = '/b/' + currentURL[0];
+				return;
+			}
 
 			let html = '';
 
