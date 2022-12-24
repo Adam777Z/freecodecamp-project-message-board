@@ -94,7 +94,7 @@
 											<form class="board-form d-flex" action="/api/replies/${currentBoard}" method="delete">
 												<input type="hidden" name="thread_id" value="${thread['_id']}" required>
 												<input type="hidden" name="reply_id" value="${reply['_id']}" required>
-												<input class="form-control me-2" type="text" name="delete_password" placeholder="Password" required>
+												<input class="form-control me-2" type="text" name="delete_password" placeholder="Password to delete" required>
 												<input class="btn btn-danger" type="submit" value="Delete reply">
 											</form>
 										</div>
@@ -128,7 +128,7 @@
 								</form>
 								<form class="board-form d-flex" action="/api/threads/${currentBoard}" method="delete">
 									<input type="hidden" name="thread_id" value="${thread['_id']}" required>
-									<input class="form-control me-2" type="text" name="delete_password" placeholder="Password" required>
+									<input class="form-control me-2" type="text" name="delete_password" placeholder="Password to delete" required>
 									<input class="btn btn-danger" type="submit" value="Delete thread">
 								</form>
 							</div>
