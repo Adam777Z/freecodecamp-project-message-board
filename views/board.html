@@ -23,7 +23,7 @@
 						<h3>Submit a new thread:</h3>
 						<form id="newThread" class="text-center" action="/api/" method="post">
 							<textarea class="form-control mb-2" rows="8" cols="120" name="text" placeholder="Thread text..." required></textarea>
-							<input class="form-control mb-2" type="text" name="delete_password" placeholder="Password to delete" required>
+							<input class="form-control mb-2" type="text" name="delete_password" placeholder="Password to delete" autocomplete="off" required>
 							<input class="btn btn-primary" type="submit" value="Submit">
 						</form>
 					</div>
@@ -94,7 +94,7 @@
 											<form class="board-form d-flex" action="/api/replies/${currentBoard}" method="delete">
 												<input type="hidden" name="thread_id" value="${thread['_id']}" required>
 												<input type="hidden" name="reply_id" value="${reply['_id']}" required>
-												<input class="form-control me-2" type="text" name="delete_password" placeholder="Password to delete" required>
+												<input class="form-control me-2" type="text" name="delete_password" placeholder="Password to delete" autocomplete="off" required>
 												<input class="btn btn-danger" type="submit" value="Delete reply">
 											</form>
 										</div>
@@ -109,7 +109,7 @@
 								<form class="text-center" action="/api/replies/${currentBoard}" method="post">
 									<input type="hidden" name="thread_id" value="${thread['_id']}">
 									<textarea class="form-control mb-2" rows="5" cols="80" name="text" placeholder="Quick reply..." required></textarea>
-									<input class="form-control mb-2" type="text" name="delete_password" placeholder="Password to delete" required>
+									<input class="form-control mb-2" type="text" name="delete_password" placeholder="Password to delete" autocomplete="off" required>
 									<input class="btn btn-primary" type="submit" value="Submit">
 								</form>
 							</div>
@@ -128,7 +128,7 @@
 								</form>
 								<form class="board-form d-flex" action="/api/threads/${currentBoard}" method="delete">
 									<input type="hidden" name="thread_id" value="${thread['_id']}" required>
-									<input class="form-control me-2" type="text" name="delete_password" placeholder="Password to delete" required>
+									<input class="form-control me-2" type="text" name="delete_password" placeholder="Password to delete" autocomplete="off" required>
 									<input class="btn btn-danger" type="submit" value="Delete thread">
 								</form>
 							</div>

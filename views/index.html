@@ -87,7 +87,7 @@
 								<form class="test-form-new" action="/api/threads/" method="post">
 									<input type="text" class="form-control mb-2" name="board" placeholder="Board" required>
 									<textarea class="form-control mb-2" name="text" placeholder="Thread text..." required></textarea>
-									<input type="text" class="form-control mb-2" name="delete_password" placeholder="Password to delete" required>
+									<input type="text" class="form-control mb-2" name="delete_password" placeholder="Password to delete" autocomplete="off" required>
 									<input type="submit" class="btn btn-primary" value="Submit">
 								</form>
 							</div>
@@ -106,7 +106,7 @@
 								<form class="test-form" action="/api/threads/" method="delete">
 									<input type="text" class="form-control mb-2" name="board" placeholder="Board" required>
 									<input type="text" class="form-control mb-2" name="thread_id" placeholder="ID of thread to delete" required>
-									<input type="text" class="form-control mb-2" name="delete_password" placeholder="Password to delete" required>
+									<input type="text" class="form-control mb-2" name="delete_password" placeholder="Password to delete" autocomplete="off" required>
 									<input type="submit" class="btn btn-danger" value="Submit">
 								</form>
 							</div>
@@ -122,7 +122,7 @@
 									<input type="text" class="form-control mb-2" name="board" placeholder="Board" required>
 									<input type="text" class="form-control mb-2" name="thread_id" placeholder="Thread ID" required>
 									<textarea class="form-control mb-2" name="text" placeholder="Reply text..." required></textarea>
-									<input type="text" class="form-control mb-2" name="delete_password" placeholder="Password to delete" required>
+									<input type="text" class="form-control mb-2" name="delete_password" placeholder="Password to delete" autocomplete="off" required>
 									<input type="submit" class="btn btn-primary" value="Submit">
 								</form>
 							</div>
@@ -143,7 +143,7 @@
 									<input type="text" class="form-control mb-2" name="board" placeholder="Board" required>
 									<input type="text" class="form-control mb-2" name="thread_id" placeholder="Thread ID" required>
 									<input type="text" class="form-control mb-2" name="reply_id" placeholder="ID of reply to delete" required>
-									<input type="text" class="form-control mb-2" name="delete_password" placeholder="Password to delete" required>
+									<input type="text" class="form-control mb-2" name="delete_password" placeholder="Password to delete" autocomplete="off" required>
 									<input type="submit" class="btn btn-danger" value="Submit">
 								</form>
 							</div>
